@@ -1,0 +1,12 @@
+version: "3.9"
+
+networks:
+  default:
+    name: "intens_network"
+
+services:
+  intens:
+    image: whiteboii/intens
+    container_name: intens_2
+    ports: 
+      - "8080:8080"
