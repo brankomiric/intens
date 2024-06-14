@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intens
+spec:
+  selector:
+    matchLabels:
+      app: intens
+  template:
+    metadata:
+      labels:
+        app: intens
+    spec:
+      containers:
+        - name: intens
+          image: whiteboii/intens
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: 8080
