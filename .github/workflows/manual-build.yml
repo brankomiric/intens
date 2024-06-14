@@ -51,6 +51,6 @@ jobs:
         with:
           push: true
           tags: |
-            whiteboii/${{env.SERVICE_NAME}}_${{env.VERSION_TAG}}_${{github.ref_name}}
+            whiteboii/${{env.SERVICE_NAME}}:${{env.VERSION_TAG}}_${{github.ref_name}}
           build-args: |
             ${{steps.version_step.outputs.version}}
