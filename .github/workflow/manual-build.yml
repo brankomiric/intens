@@ -1,0 +1,29 @@
+name: Manual build&deploy to dev
+
+on:
+  workflow_dispatch:
+
+env:
+  SERVICE_NAME: "intens"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Mandatory to use the extract version from tag action 
+      - name: Extract version from tag
+        uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+      - name: Extract Version
+        id: version_step
+        run: |
+          echo "version=$(echo $MAJOR.$MINOR.$(($PATCH + $NUMBER_OF_COMMITS_SINCE_TAG)))" >> $GITHUB_OUTPUT
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "branch=${GITHUB_BASE_REF:-${GITHUB_REF_NAME}}" >> $GITHUB_OUTPUT
+      - name: Print Version
+        run: |
+          echo ${{steps.version_step.outputs.version}}
