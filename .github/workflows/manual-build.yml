@@ -27,3 +27,10 @@ jobs:
       - name: Print Version
         run: |
           echo ${{steps.version_step.outputs.version}}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      - name: Run tests
+        run: mvn test
