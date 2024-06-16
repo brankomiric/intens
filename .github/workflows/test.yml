@@ -35,3 +35,8 @@ jobs:
           cache: 'maven'
       - name: Run tests
         run: mvn test
+    - name: Publish test report
+      uses: mikepenz/action-junit-report@v3.8.0
+      if: success() || failure()
+      with:
+        report_paths: './target/surefire-reports/TEST-intens.api.praksa2022.Praksa2022ApplicationTests.xml' 
